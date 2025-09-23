@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Management</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form">
+        <div class="form-control">
+          <label for="item">Item Name:</label>
+          <input type="text" name="item" />
+        </div>
+        <div class="form-control">
+          <label for="description">Description:</label>
+          <input type="text" name="description" />
+        </div>
+        <div class="form-control">
+          <label for="price">Price:</label>
+          <input type="number" name="price" />
+        </div>
+        <div class="form-control">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity" />
+        </div>
+        <button type="submit">Add Item</button>
+      </form>
+      <table id="inventory-table">
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Buy</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>
