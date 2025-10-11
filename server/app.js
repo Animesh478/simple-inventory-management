@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config({ path: "../.env" });
+const cors = require("cors");
 
 const sequelize = require("./config/db");
 const synchronizeModels = require("./model/index");
@@ -10,6 +11,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/items", itemRouter);
 
