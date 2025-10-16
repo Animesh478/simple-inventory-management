@@ -23,8 +23,8 @@
           <input type="number" name="price" id="price" />
         </div>
         <div class="form-control">
-          <label for="quantity">Quantity</label>
-          <input type="number" name="quantity" id="quantity" />
+          <label for="stock-quantity">Quantity</label>
+          <input type="number" name="stock-quantity" id="stock-quantity" />
         </div>
         <button type="submit" id="sumbit-btn">Add Item</button>
       </form>
@@ -39,28 +39,27 @@
         </div>
 
         <!-- Rows -->
-        <div class="row">
-          <div class="cell">Apples</div>
-          <div class="cell">Fruits</div>
-          <div class="cell">$1.00</div>
-          <div class="cell">100</div>
-          <div class="cell">
-            <input type="number" value="0" min="0" max="10" class="qty-input" />
-            <button class="buy-btn">Buy</button>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="cell">Oranges</div>
-          <div class="cell">Fruits</div>
-          <div class="cell">$2.00</div>
-          <div class="cell">100</div>
-          <div class="cell">
-            <input type="number" value="0" min="0" max="10" class="qty-input" />
-            <button class="buy-btn">Buy</button>
-          </div>
-        </div>
       </div>
+
+      <!-- Template -->
+      <template class="item-template">
+        <div class="row">
+          <div class="cell item"></div>
+          <div class="cell desc"></div>
+          <div class="cell price"></div>
+          <div class="cell stock"></div>
+          <div class="cell action">
+            <div class="quantity-container">
+              <button class="quantityIncrement">+</button>
+              <p class="quantity">1</p>
+              <button class="quantityDecrement">-</button>
+            </div>
+            <button class="buy-btn">Buy</button>
+          </div>
+        </div>
+      </template>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -85,3 +85,29 @@ h1 {
 .buy-btn:hover {
   background-color: #0572fa;
 }
+
+.action {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.5rem;
+}
+
+.quantity-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: stretch;
+  align-items: center;
+  border: 1px solid #d3d3d3;
+}
+.quantity-container .quantity {
+  text-align: center;
+}
+
+.quantityIncrement,
+.quantityDecrement {
+  border: none;
+  background-color: none;
+  font-size: 1.5rem;
+  border-right: 1px solid #d3d3d3;
+  cursor: pointer;
+}

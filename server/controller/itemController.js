@@ -2,7 +2,7 @@ const Item = require("../model/itemModel");
 
 async function getItems(req, res) {
   const result = await Item.findAll();
-  res.status(200).json(result);
+  res.status(200).json({ data: result });
 }
 
 async function addItem(req, res) {
@@ -26,6 +26,9 @@ async function updateItem(req, res) {
     return res.status(400).json({ message: "Item not Found" });
   } else {
     const newQuantity = item.quantity - quantitySold; // computing the new quantity after selling
+    if (newQuantity < 0) {
+      return res.status(400).json({ message: "Insufficient quantity" });
+    }
     await Item.update(
       { quantity: newQuantity }, // updating the quantity in the db
       {
