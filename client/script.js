@@ -40,7 +40,7 @@ const getAllItems = async function () {
 const displayAllItems = async function () {
   itemsList.innerHTML = "";
   const itemsArray = await getAllItems();
-  console.log(itemsArray);
+
   itemsArray.forEach((item) => {
     const itemClone = productTemplate.content.cloneNode(true); //create clone from the template
 
@@ -73,8 +73,6 @@ const addItem = async function () {
     itemObj[key] = value;
   });
 
-  console.log(itemObj);
-
   try {
     await axios.post("http://localhost:3000/items", itemObj);
     await displayAllItems();
@@ -87,7 +85,6 @@ const addItem = async function () {
 // when we click the buy button
 const buyItem = async function (event, id) {
   const rowEl = event.target.parentElement.parentElement;
-  console.log(rowEl);
   if (parseInt(rowEl.dataset.id) === id) {
     const quantityToSell = parseInt(
       rowEl.querySelector(".quantity").textContent

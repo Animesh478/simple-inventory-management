@@ -1,7 +1,7 @@
 const Item = require("./itemModel");
 
 async function synchronizeModels() {
-  await Item.sync({ force: true });
+  await Item.sync();
   console.log("Appointment table synchronized");
 }
 

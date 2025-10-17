@@ -6,8 +6,6 @@ async function getItems(req, res) {
 }
 
 async function addItem(req, res) {
-  //   const { name, quantity, description, price } = req.body;
-  console.log(req.body);
   const { itemName, description, price, stockQuantity: stock } = req.body;
   await Item.create({
     itemName,
@@ -28,9 +26,9 @@ async function updateItem(req, res) {
     return res.status(400).json({ message: "Item not Found" });
   } else {
     const newStock = item.stock - quantitySold; // computing the new quantity after selling
-    if (newStock < 0) {
-      return res.status(400).json({ message: "Insufficient quantity" });
-    }
+    // if (newStock < 0) {
+    //   return res.status(400).json({ message: "Insufficient quantity" });
+    // }
     await Item.update(
       { stock: newStock }, // updating the quantity in the db
       {
