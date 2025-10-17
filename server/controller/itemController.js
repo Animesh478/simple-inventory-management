@@ -1,20 +1,28 @@
 const Item = require("../model/itemModel");
 
 async function getItems(req, res) {
-  const result = await Item.findAll();
-  res.status(200).json({ data: result });
+  try {
+    const result = await Item.findAll();
+    res.status(200).json({ data: result });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function addItem(req, res) {
   const { itemName, description, price, stockQuantity: stock } = req.body;
-  await Item.create({
-    itemName,
-    description,
-    price,
-    stock,
-  });
-  console.log("Item added successfully");
-  res.status(201).json({ message: "item added" });
+  try {
+    await Item.create({
+      itemName,
+      description,
+      price,
+      stock,
+    });
+    console.log("Item added successfully");
+    res.status(201).json({ message: "item added" });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function updateItem(req, res) {
@@ -29,16 +37,20 @@ async function updateItem(req, res) {
     // if (newStock < 0) {
     //   return res.status(400).json({ message: "Insufficient quantity" });
     // }
-    await Item.update(
-      { stock: newStock }, // updating the quantity in the db
-      {
-        where: {
-          id,
-        },
-      }
-    );
+    try {
+      await Item.update(
+        { stock: newStock }, // updating the quantity in the db
+        {
+          where: {
+            id,
+          },
+        }
+      );
+      return res.status(200).json({ message: "Quantity modified" });
+    } catch (error) {
+      console.log(error);
+    }
   }
-  return res.status(200).json({ message: "Quantity modified" });
 }
 
 module.exports = {

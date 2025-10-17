@@ -47,7 +47,7 @@ const displayAllItems = async function () {
     itemClone.querySelector(".row").dataset.id = item.id;
     itemClone.querySelector(".item").textContent = item.itemName;
     itemClone.querySelector(".desc").textContent = item.description;
-    itemClone.querySelector(".price").textContent = item.price;
+    itemClone.querySelector(".price").textContent = `₹${item.price}`;
     itemClone.querySelector(".stock").textContent = item.stock;
 
     itemClone
