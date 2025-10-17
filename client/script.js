@@ -48,13 +48,17 @@ const displayAllItems = async function () {
     itemClone.querySelector(".item").textContent = item.itemName;
     itemClone.querySelector(".desc").textContent = item.description;
     itemClone.querySelector(".price").textContent = item.price;
-    itemClone.querySelector(".stock").textContent = item.quantity;
+    itemClone.querySelector(".stock").textContent = item.stock;
 
     itemClone
       .querySelector(".quantity-container")
       .addEventListener("click", (event) => {
-        toggleItemQuantity(event, item.id, item.quantity);
+        toggleItemQuantity(event, item.id, item.stock);
       });
+
+    itemClone.querySelector(".buy-btn").addEventListener("click", (event) => {
+      buyItem(event, item.id);
+    });
 
     itemsList.appendChild(itemClone);
   });
@@ -71,12 +75,35 @@ const addItem = async function () {
 
   console.log(itemObj);
 
-  await axios.post("http://localhost:3000/items", itemObj);
-  await displayAllItems();
+  try {
+    await axios.post("http://localhost:3000/items", itemObj);
+    await displayAllItems();
+    form.reset();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // when we click the buy button
-const buyItem = function () {};
+const buyItem = async function (event, id) {
+  const rowEl = event.target.parentElement.parentElement;
+  console.log(rowEl);
+  if (parseInt(rowEl.dataset.id) === id) {
+    const quantityToSell = parseInt(
+      rowEl.querySelector(".quantity").textContent
+    );
+    if (quantityToSell === 0) return;
+
+    try {
+      await axios.put(`http://localhost:3000/items/${id}`, {
+        quantity: quantityToSell,
+      });
+      displayAllItems();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 // Event Listeners
 form.addEventListener("submit", (event) => {
