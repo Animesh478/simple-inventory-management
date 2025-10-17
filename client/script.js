@@ -1,12 +1,13 @@
 const form = document.getElementById("form");
 const inventoryEl = document.querySelector(".inventory");
+const itemsList = document.querySelector(".items-list");
 const productTemplate = document.querySelector(".item-template");
 
 // function to toggle the quantity of each item
 const toggleItemQuantity = function (event, id, stock) {
-  const quantityEl = document.querySelector(".quantity");
-  let quantity = parseInt(quantityEl.textContent);
   const rowEl = event.currentTarget.parentElement.parentElement;
+  const quantityEl = rowEl.querySelector(".quantity");
+  let quantity = parseInt(quantityEl.textContent);
 
   if (parseInt(rowEl.dataset.id) === id) {
     if (event.target.className === "quantityIncrement") {
@@ -18,11 +19,11 @@ const toggleItemQuantity = function (event, id, stock) {
       }
     }
     if (event.target.className === "quantityDecrement") {
-      if (quantity > 1) {
+      if (quantity > 0) {
         quantity -= 1;
       }
-      if (quantity === 1) {
-        quantity = 1;
+      if (quantity === 0) {
+        quantity = 0;
       }
     }
   }
@@ -37,6 +38,7 @@ const getAllItems = async function () {
 
 // display the items
 const displayAllItems = async function () {
+  itemsList.innerHTML = "";
   const itemsArray = await getAllItems();
   console.log(itemsArray);
   itemsArray.forEach((item) => {
@@ -54,14 +56,33 @@ const displayAllItems = async function () {
         toggleItemQuantity(event, item.id, item.quantity);
       });
 
-    inventoryEl.appendChild(itemClone);
+    itemsList.appendChild(itemClone);
   });
 };
 
 // when we add a new item
-const addItem = async function () {};
+const addItem = async function () {
+  const formData = new FormData(form);
+  const itemObj = {};
 
-const buyItem = function () {}; // when we click the buy button
+  formData.forEach((value, key) => {
+    itemObj[key] = value;
+  });
+
+  console.log(itemObj);
+
+  await axios.post("http://localhost:3000/items", itemObj);
+  await displayAllItems();
+};
+
+// when we click the buy button
+const buyItem = function () {};
+
+// Event Listeners
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addItem();
+});
 
 const init = function () {
   displayAllItems();

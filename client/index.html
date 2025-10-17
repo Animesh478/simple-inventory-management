@@ -11,8 +11,8 @@
       <h1>INVENTORY</h1>
       <form id="form">
         <div class="form-control">
-          <label for="item-name">Item Name:</label>
-          <input type="text" name="item" id="item-name" />
+          <label for="itemName">Item Name:</label>
+          <input type="text" name="itemName" id="itemName" />
         </div>
         <div class="form-control">
           <label for="description">Description:</label>
@@ -23,8 +23,8 @@
           <input type="number" name="price" id="price" />
         </div>
         <div class="form-control">
-          <label for="stock-quantity">Quantity</label>
-          <input type="number" name="stock-quantity" id="stock-quantity" />
+          <label for="stockQuantity">Quantity</label>
+          <input type="number" name="stockQuantity" id="stockQuantity" />
         </div>
         <button type="submit" id="sumbit-btn">Add Item</button>
       </form>
@@ -39,6 +39,7 @@
         </div>
 
         <!-- Rows -->
+        <div class="items-list"></div>
       </div>
 
       <!-- Template -->
@@ -51,7 +52,7 @@
           <div class="cell action">
             <div class="quantity-container">
               <button class="quantityIncrement">+</button>
-              <p class="quantity">1</p>
+              <p class="quantity">0</p>
               <button class="quantityDecrement">-</button>
             </div>
             <button class="buy-btn">Buy</button>

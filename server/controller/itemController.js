@@ -7,11 +7,13 @@ async function getItems(req, res) {
 
 async function addItem(req, res) {
   //   const { name, quantity, description, price } = req.body;
+  console.log(req.body);
+  const { itemName, description, price, stockQuantity: quantity } = req.body;
   await Item.create({
-    itemName: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    quantity: req.body.quantity,
+    itemName,
+    description,
+    price,
+    quantity,
   });
   console.log("Item added successfully");
   res.status(201).json({ message: "item added" });
